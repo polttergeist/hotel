@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Admin's bookings page</h1>
+
+<div id="bookings">
+  <% @bookings.each do |booking| %>
+    <%= render booking %>
+  <% end %>
+</div>

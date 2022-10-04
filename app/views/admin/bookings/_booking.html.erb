@@ -1,0 +1,25 @@
+<div id="<%= dom_id booking %>">
+  <p>
+    <%= "Name : #{booking.name}" %>
+  </p>
+  <p>
+    <%= "Email : #{booking.email}" %>
+  </p>
+  <p>
+    <%= "Booking start : #{booking.start_date}" %>
+  </p>
+  <p>
+    <%= "Booking end : #{booking.end_date}" %>
+  </p>
+  <p>
+    <%= "Approved : #{booking.approved}" %>
+  </p>
+  <p>
+    <%= "Room : #{booking.room_id}" %>
+  </p>
+  <% if booking.approved == 0 %>
+    <%= button_to "Approve booking", admin_booking_path(booking), method: :patch %>
+  <% end %>
+  <%= button_to "Delete booking", admin_booking_path(booking), method: :delete %>
+  <hr/>
+</div>

@@ -1,0 +1,19 @@
+<div id="<%= dom_id review %>">
+  <p>
+    <%= "Name : #{review.name}" %>
+  </p>
+  <p>
+    <%= "Email : #{review.email}" %>
+  </p>
+  <p>
+    <%= "Comment : #{review.comment}" %>
+  </p>
+  <p>
+    <%= "Approved : #{review.approved}" %>
+  </p>
+  <% if review.approved == 0 %>
+    <%= button_to "Approve review", admin_review_path(review), method: :patch %>
+  <% end %>
+  <%= button_to "Delete review", admin_review_path(review), method: :delete %>
+  <hr/>
+</div>

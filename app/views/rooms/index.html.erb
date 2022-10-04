@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Rooms</h1>
+
+<div id="rooms">
+  <% @rooms.each do |room| %>
+    <%= render room, obj: room %>
+    <hr/>
+  <% end %>
+</div>

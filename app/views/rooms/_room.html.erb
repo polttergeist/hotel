@@ -1,0 +1,16 @@
+<div id="<%= dom_id obj %>">
+  <p>
+    <%= "Name : #{obj.name}" %>
+  </p>
+  <p>
+    <%= "Cost : #{obj.cost}" %>
+  </p>
+  <p>
+    <% if defined? room %>
+      <%= truncate(obj.description, length: 70) %>
+    <% else %>
+      <%= obj.description %>
+    <% end %>
+  </p>
+  <%= link_to "Book the room", room if defined? room %>
+</div>

@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Reviews</h1>
+
+<h2>Write your own review!</h2>
+
+<%= render "form" %>
+
+<div id="reviews">
+  <% @reviews.each do |review| %>
+    <%= render review %>
+  <% end %>
+</div>

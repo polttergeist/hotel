@@ -1,0 +1,26 @@
+<h1>Admin's rooms page</h1>
+
+<table>
+  <% unless @rooms.empty? %>
+    <tr>
+      <td>Room name</td>
+      <td>Date of creation</td>
+      <td>Date of last update</td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+
+  <% @rooms.each do |room| %>
+  <tr>
+    <td><%= room.name %></td>
+    <td><%= room.created_at %></td>
+    <td><%= room.updated_at %></td>
+    <td><%= button_to "Destroy room", admin_room_path(room), method: :delete %></td>
+    <td><%= button_to "Update room", edit_admin_room_path(room), method: :get %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= button_to "Create room", new_admin_room_path, method: :get %>
+<%= button_to "Log out", destroy_administrator_session_path, method: :delete %>
