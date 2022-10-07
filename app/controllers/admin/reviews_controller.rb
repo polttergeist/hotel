@@ -1,6 +1,7 @@
 class Admin::ReviewsController < ApplicationController
+  before_action :set_admin
   before_action :set_review, only: %i[ update destroy ]
-  before_action :authenticate_administrator!
+  before_action :authenticate_user!
 
   def index
     @reviews = Review.all_ordered_by_date
@@ -22,5 +23,9 @@ class Admin::ReviewsController < ApplicationController
 
   def set_review
     @review = Review.find(params[:id])
+  end
+
+  def set_admin
+    @admin = true
   end
 end

@@ -1,3 +1,4 @@
+<div class="row reviews-wrap">
 <div id="<%= dom_id review %>">
   <p>
     <%= "Name : #{review.name}" %>
@@ -9,11 +10,11 @@
     <%= "Comment : #{review.comment}" %>
   </p>
   <p>
-    <%= "Approved : #{review.approved}" %>
+    <%= "Approved : #{review.approved? ? "true" : "false"}" %>
   </p>
   <% if review.approved == 0 %>
     <%= button_to "Approve review", admin_review_path(review), method: :patch %>
   <% end %>
   <%= button_to "Delete review", admin_review_path(review), method: :delete %>
-  <hr/>
+</div>
 </div>

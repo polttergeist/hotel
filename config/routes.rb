@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  post "moderators/sign_up", to: "signup_prohibit#create"
-  get "moderators/sign_up", to: "signup_prohibit#index"
-  devise_for :moderators
-  post "administrators/sign_up", to: "signup_prohibit#create"
-  get "administrators/sign_up", to: "signup_prohibit#index"
-  devise_for :administrators
+  get '/admin/rooms' => "admin/rooms#index", :as => :user_root
+  post "users/sign_up", to: "signup_prohibit#create"
+  get "users/sign_up", to: "signup_prohibit#index"
+
+  devise_scope :user do
+    get "users/sign_out", to: "devise/sessions#destroy"
+  end
+
+  devise_for :users
   resources :rooms
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

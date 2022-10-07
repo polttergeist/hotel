@@ -1,22 +1,40 @@
-<%= form_with(url: admin_rooms_path, model: @room) do |form| %>
-  <%# render errors %>
-
+<div class="row">
   <div>
-    <%= form.label :name %>
-    <%= form.text_field :name, placeholder: "Enter room's name" %>
-  </div>
+    <%= form_with(url: admin_rooms_path, model: @room, :html => {class: "form-horizontal", role: "form"}) do |form| %>
+      <%# render errors %>
 
-  <div>
-    <%= form.label :cost %>
-    <%= form.number_field :cost, placeholder: "Enter room's cost" %>
-  </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :name %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.text_field :name, class: "form-control", placeholder: "Enter room's name" %>
+        </div>
+      </div>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description, placeholder: "Write down room's description" %>
-  </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :cost %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.text_field :cost, class: "form-control", placeholder: "Enter room's cost" %>
+        </div>
+      </div>
 
-  <div>
-    <%= form.submit %>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :description %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.text_area :description, class: "form-control", placeholder: "Write down room's description" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= form.submit %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

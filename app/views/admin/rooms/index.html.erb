@@ -1,6 +1,12 @@
-<h1>Admin's rooms page</h1>
+<p style="color: green"><%= notice %></p>
 
-<table>
+<div class="row text-center wrap col-xs-4 col-xs-offset-4"  style="padding: 2rem;">
+  <h1>Admin's rooms page</h1>
+</div>
+
+<div class="wrap col-xs-8 col-xs-offset-2 admin-rooms-wrapper">
+<table id="rooms-table">
+  <tbody>
   <% unless @rooms.empty? %>
     <tr>
       <td>Room name</td>
@@ -20,7 +26,11 @@
     <td><%= button_to "Update room", edit_admin_room_path(room), method: :get %></td>
   </tr>
   <% end %>
+  </tbody>
 </table>
+</div>
 
-<%= button_to "Create room", new_admin_room_path, method: :get %>
-<%= button_to "Log out", destroy_administrator_session_path, method: :delete %>
+<div class="d-flex justify-content-center col-xs-2 col-xs-offset-5" style="margin-top: 2rem;">
+      <%= button_to "Create room", new_admin_room_path, method: :get %>
+      <%# button_to "Log out", destroy_administrator_session_path, method: :delete %>
+</div>

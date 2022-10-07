@@ -1,34 +1,60 @@
-<%= form_with(url: booking_path) do |form| %>
-  <%# render errors %>
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_with(url: booking_path, :html => {class: "form-horizontal", role: "form"}) do |form| %>
+      <%# render errors %>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name, placeholder: "Enter your name" %>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :name %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.text_field :name, class: "form-control", placeholder: "Enter your name" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :email %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.text_field :email, class: "form-control", placeholder: "Enter your email" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :arrival_date %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.date_select :start_date, class: "form-control", start_year: Time.now.year %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :departure_date %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.date_select :end_date, class: "form-control", start_year: Time.now.year %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :comment %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.text_area :comment, class: "form-control", placeholder: "Enter your comment" %>
+        </div>
+      </div>
+
+      <%= hidden_field_tag 'room_id', @room.id %>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= form.submit %>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :email %>
-    <%= form.text_field :email, placeholder: "Enter your email" %>
-  </div>
-
-  <div>
-    <%= form.label :arrival_date %>
-    <%= form.date_select :start_date, start_year: Time.now.year %>
-  </div>
-
-  <div>
-    <%= form.label :departure_date %>
-    <%= form.date_select :end_date, start_year: Time.now.year %>
-  </div>
-
-  <div>
-    <%= form.label :comment %>
-    <%= form.text_area :comment, placeholder: "Enter your comment" %>
-  </div>
-
-  <%= hidden_field_tag 'room_id', @room.id %>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

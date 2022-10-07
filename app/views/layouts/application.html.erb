@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%= @admin.nil? ? render("shared/basic_navigation") : render("shared/admin_navigation") %>
     <%= yield %>
   </body>
 </html>

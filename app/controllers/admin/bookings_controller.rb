@@ -1,6 +1,7 @@
 class Admin::BookingsController < ApplicationController
+  before_action :set_admin
   before_action :set_booking, only: %i[ update destroy ]
-  before_action :authenticate_administrator!
+  before_action :authenticate_user!
 
   def index
     @bookings = Booking.all_ordered_by_date
@@ -22,5 +23,9 @@ class Admin::BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def set_admin
+    @admin = true
   end
 end

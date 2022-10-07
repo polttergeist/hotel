@@ -1,9 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Admin's reviews page</h1>
+<div class="row text-center wrap col-xs-4 col-xs-offset-4"  style="padding: 2rem;">
+  <h1>Admin's reviews page</h1>
+</div>
 
-<div id="reviews">
+<div id="reviews" class="wrap col-xs-8 col-xs-offset-2">
   <% @reviews.each do |review| %>
     <%= render review %>
+    <hr style="margin: 0"/>
   <% end %>
 </div>
