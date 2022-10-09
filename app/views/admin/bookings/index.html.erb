@@ -9,6 +9,8 @@
     <%= render booking %>
     <hr style="margin: 0"/>
   <% end %>
+  <%= link_to 'Download CSV', "bookings_controller.csv" %>
+  <%= link_to 'Download XLSX', "bookings_controller.xlsx" %>
 </div>
 
 <div class="col-xs-8 col-xs-offset-2 digg_pagination">

@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     resources :rooms
     resources :reviews
     resources :bookings
+    get 'bookings_controller(.:format)', to: 'files#download'
   end
 end
