@@ -8,5 +8,20 @@
   <% @rooms.each do |room| %>
     <%= render room, obj: room %>
     <hr style="margin: 0"/>
+    <ul>
+      <% room.images.each do |file| %>
+        <li>
+          <% if file.representable? %>
+            <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
+          <% else %>
+            <%= "nonono" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
+</div>
+
+<div class="col-xs-8 col-xs-offset-2 digg_pagination">
+  <%= will_paginate @rooms %>
 </div>

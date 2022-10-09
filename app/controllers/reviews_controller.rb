@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   def index
-    @reviews = Review.approved_reviews
+    @reviews = Review.approved_reviews.paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
       flash[:success] = "Review was successfully created"
       redirect_to reviews_path
     else
-      @reviews = Review.approved_reviews
+      @reviews = Review.approved_reviews.paginate(page: params[:page], per_page: 10)
       render "index"
     end
   end

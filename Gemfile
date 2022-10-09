@@ -51,6 +51,13 @@ gem 'bootstrap-sass', '~> 3.4.1'
 gem 'sassc-rails', '>= 2.1.0'
 gem "lib"
 gem "image_processing", ">= 1.2"
+gem "webpacker"
+gem "sidekiq"
+gem "sidekiq-scheduler"
+gem "csv"
+gem "rubyXL"
+gem "wicked_pdf"
+gem "will_paginate"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

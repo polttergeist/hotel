@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = Room.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /rooms/1 or /rooms/1.json
@@ -65,6 +65,6 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.fetch(:room, {})
+      params.require(:room).permit(:name, :cost, :description)
     end
 end

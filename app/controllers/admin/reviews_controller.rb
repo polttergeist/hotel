@@ -4,7 +4,7 @@ class Admin::ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reviews = Review.all_ordered_by_date
+    @reviews = Review.all_ordered_by_date.paginate(page: params[:page], per_page: 10)
   end
 
   def update

@@ -1,6 +1,5 @@
 class BookingsController < ApplicationController
   def create
-    binding.irb
     @booking = Booking.new(booking_params)
     @booking.approved = false
     @booking.save ? flash[:success] = "Room was successfully booked" : flash[:success] = "There was some error"

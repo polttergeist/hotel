@@ -1,0 +1,5 @@
+:queues:
+  - default
+:schedule:
+    WeatherApiRequestJob:
+        cron: '0 */2 * * *'
