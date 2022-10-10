@@ -10,13 +10,13 @@ class Admin::ReviewsController < ApplicationController
   def update
     @review.update(approved: true)
     redirect_to admin_reviews_path
-    flash[:notice] = "Review was approved"
+    flash[:success] = "Review was approved"
   end
 
   def destroy
     @review.destroy
     redirect_to admin_reviews_path
-    flash[:notice] = "Review was deleted"
+    flash[:success] = "Review was deleted"
   end
 
   private

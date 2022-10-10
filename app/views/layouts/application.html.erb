@@ -8,11 +8,11 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_pack_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= javascript_pack_tag "email_validator", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
     <%= @admin.nil? ? render("shared/basic_navigation") : render("shared/admin_navigation") %>
+    <%= render 'shared/messages' %>
     <%= yield %>
   </body>
 </html>

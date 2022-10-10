@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: green"><%# notice %></p>
 
 <div class="row text-center wrap col-xs-4 col-xs-offset-4" style="padding: 1rem;">
   <h1>Rooms</h1>
@@ -6,19 +6,24 @@
 
 <div id="rooms" class="wrap col-xs-8 col-xs-offset-2">
   <% @rooms.each do |room| %>
+    <% if room.images.first&.representable? %>
+      <div class="row">
+    <div class="col-xs-3">
+      <div>
+          <%= image_tag room.images.first.representation(resize_to_limit: [200, 200]) %>
+      </div>
+    </div>
+    <div class="col-xs-9">
     <%= render room, obj: room %>
-    <hr style="margin: 0"/>
-    <ul>
-      <% room.images.each do |file| %>
-        <li>
-          <% if file.representable? %>
-            <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
-          <% else %>
-            <%= "nonono" %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    </div>
+      </div>
+      <hr style="margin: 0"/>
+    <% else %>
+      <div class="col-xs-12">
+        <%= render room, obj: room %>
+        <hr style="margin: 0"/>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

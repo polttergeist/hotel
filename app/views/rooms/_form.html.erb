@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" id="form">
   <div class="col-xs-12">
-    <%= form_with(url: booking_path, :html => {class: "form-horizontal", role: "form"}) do |form| %>
+    <%= form_with(url: "/booking/new/#{@room.id}", :html => {class: "form-horizontal", role: "form"}) do |form| %>
       <%# render errors %>
 
       <div class="form-group">
@@ -25,7 +25,7 @@
         <div class="control-label col-sm-2">
           <%= form.label :arrival_date %>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="start_date">
           <%= form.date_select :start_date, class: "form-control", start_year: Time.now.year %>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <div class="control-label col-sm-2">
           <%= form.label :departure_date %>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="end_date">
           <%= form.date_select :end_date, class: "form-control", start_year: Time.now.year %>
         </div>
       </div>

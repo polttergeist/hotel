@@ -16,7 +16,7 @@
 // const imagePath = (name) => images(name, true)
 
 //= require activestorage
-console.log('Hello World from Webpacker')
+//console.log('Hello World from Webpacker')
 //import "@hotwired/turbo-rails"
 //import "./controllers"
 import * as ActiveStorage from "@rails/activestorage"
