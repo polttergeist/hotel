@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PagesController < ApplicationController
   def index
-    @random_images = ActiveStorage::Attachment.where('id > 0').limit(3)
+    @images = ActiveStorage::Attachment.first(3)
   end
 end

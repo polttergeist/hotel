@@ -10,7 +10,10 @@
       <ul class="nav navbar-nav">
         <li><%= link_to "Reviews", reviews_path %></li>
         <li><%= link_to "Rooms", rooms_path %></li>
+        <% begin %>
         <li><%= link_to "#{File.read("current_temp.txt")} °C in SPb now", root_path, id: 'disabled' %></li>
+        <% rescue %>
+        <% end %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

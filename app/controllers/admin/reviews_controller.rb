@@ -1,31 +1,35 @@
-class Admin::ReviewsController < ApplicationController
-  before_action :set_admin
-  before_action :set_review, only: %i[ update destroy ]
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  def index
-    @reviews = Review.all_ordered_by_date.paginate(page: params[:page], per_page: 10)
-  end
+module Admin
+  class ReviewsController < ApplicationController
+    before_action :set_admin
+    before_action :set_review, only: %i[update destroy]
+    before_action :authenticate_user!
 
-  def update
-    @review.update(approved: true)
-    redirect_to admin_reviews_path
-    flash[:success] = "Review was approved"
-  end
+    def index
+      @reviews = Review.all_ordered_by_date.paginate(page: params[:page], per_page: 10)
+    end
 
-  def destroy
-    @review.destroy
-    redirect_to admin_reviews_path
-    flash[:success] = "Review was deleted"
-  end
+    def update
+      @review.update(approved: true)
+      redirect_to admin_reviews_path
+      flash[:success] = 'Review was approved'
+    end
 
-  private
+    def destroy
+      @review.destroy
+      redirect_to admin_reviews_path
+      flash[:success] = 'Review was deleted'
+    end
 
-  def set_review
-    @review = Review.find(params[:id])
-  end
+    private
 
-  def set_admin
-    @admin = true
+    def set_review
+      @review = Review.find(params[:id])
+    end
+
+    def set_admin
+      @admin = true
+    end
   end
 end

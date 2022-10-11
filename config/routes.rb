@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  get '/admin/rooms' => "admin/rooms#index", :as => :user_root
-  post "users/sign_up", to: "signup_prohibit#create"
-  get "users/sign_up", to: "signup_prohibit#index"
+  get '/admin/rooms' => 'admin/rooms#index', :as => :user_root
+  post 'users/sign_up', to: 'signup_prohibit#create'
+  get 'users/sign_up', to: 'signup_prohibit#index'
 
   devise_scope :user do
-    get "users/sign_out", to: "devise/sessions#destroy"
+    get 'users/sign_out', to: 'devise/sessions#destroy'
   end
 
   devise_for :users
@@ -12,11 +14,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "pages#index"
+  root 'pages#index'
   resources :reviews
   resources :rooms
-  get "booking/new/:room_id", to: "bookings#new"
-  post "booking/new/:room_id", to: "bookings#create"
+  get 'booking/new/:room_id', to: 'bookings#new'
+  post 'booking/new/:room_id', to: 'bookings#create'
 
   namespace :admin do
     resources :rooms do

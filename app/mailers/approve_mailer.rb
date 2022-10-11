@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ApproveMailer < ApplicationMailer
-  default from: "hotel_california@noveo.com"
+  default from: 'hotel_california@noveo.com'
 
   def approve_mail
     @type = params[:type]
