@@ -2,11 +2,12 @@
 
 class BookingsController < ApplicationController
   def new
-    @room = Room.find(params[:room_id])
+    @room = Room.find(booking_params[:room_id])
   end
 
   def create
     @booking = Booking.new(booking_params)
+    b = booking_params
     if @booking.save
       flash[:success] = 'Room was successfully booked'
       redirect_to rooms_path

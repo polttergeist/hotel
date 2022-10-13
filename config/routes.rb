@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'users/sign_up', to: 'signup_prohibit#index'
 
   devise_scope :user do
-    get 'users/sign_out', to: 'devise/sessions#destroy'
+    get 'users/sign_in', to: 'users/sessions#new'
+    post 'users/sign_in', to: 'users/sessions#create'
+    get 'users/sign_out', to: 'users/sessions#destroy'
   end
 
   devise_for :users
@@ -17,8 +19,8 @@ Rails.application.routes.draw do
   root 'pages#index'
   resources :reviews
   resources :rooms
-  get 'booking/new/:room_id', to: 'bookings#new'
-  post 'booking/new/:room_id', to: 'bookings#create'
+  get 'booking/new', to: 'bookings#new'
+  post 'booking/new', to: 'bookings#create'
 
   namespace :admin do
     resources :rooms do
