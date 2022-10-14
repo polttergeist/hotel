@@ -14,54 +14,50 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/reviews', type: :request do
+RSpec.describe '/admin/bookings', type: :request do
   # This should return the minimal set of attributes required to create a valid
-  # Review. As you add validations to Review, be sure to
+  # Admin::Booking. As you add validations to Admin::Booking, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     {
       name: Faker::Name.name,
       email: Faker::Internet.email,
-      comment: Faker::Lorem.sentence
+      start_date: DateTime.new(2023, 0o1, 0o1),
+      end_date: DateTime.new(2023, 0o1, 0o3),
+      room_id: 1
     }
   end
 
-  let(:invalid_attributes) do
-    {
-      name: '',
-      email: '',
-      comment: ''
-    }
+  let(:admin) do
+    User.create! email: 'sample@email.com', password: 'samplepassword000', role: :admin
+  end
+
+  before do
+    sign_in admin
+    Room.create! id: 1, name: 'test_room', description: 'test_desc', cost: 228
   end
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Review.create! valid_attributes
-      get reviews_url
+      Booking.create! valid_attributes
+      sign_in(:admin)
+      get admin_bookings_url
       expect(response).to be_successful
     end
   end
 
-  describe 'POST /create' do
-    context 'with valid parameters' do
-      it 'creates a new Review' do
-        expect do
-          post reviews_url, params: { review: valid_attributes }
-        end.to change(Review, :count).by(1)
-      end
-
-      it 'redirects to the same page' do
-        post reviews_url, params: { review: valid_attributes }
-        expect(response).to redirect_to(reviews_url)
-      end
+  describe 'DELETE /destroy' do
+    it 'destroys the requested booking' do
+      booking = Booking.create! valid_attributes
+      expect do
+        delete admin_booking_url(booking)
+      end.to change(Booking, :count).by(-1)
     end
 
-    context 'with invalid parameters' do
-      it 'does not create a new Review' do
-        expect do
-          post reviews_url, params: { review: invalid_attributes }
-        end.to change(Review, :count).by(0)
-      end
+    it 'redirects to the bookings list' do
+      booking = Booking.create! valid_attributes
+      delete admin_booking_url(booking)
+      expect(response).to redirect_to(admin_bookings_url)
     end
   end
 end
