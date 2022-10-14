@@ -1,26 +1,38 @@
-web:
-  build: .
-  volumes:
-    - .:/myapp
-  links:
-    - db
-    - redis
-  ports:
-    - "3000:3000"
-  env_file:
-      - .env/development/web
-  command: bundle exec rails server -b 0.0.0.0
-sidekiq:
-  build: .
-  volumes:
-    - .:/myapp
-  links:
-    - db
-    - redis
-  command: bundle exec sidekiq
-db:
-  image: postgres
-  env_file:
-      - .env/development/db
-redis:
-  image: redis
+version: "3.9"
+services:
+  web:
+    build: .
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_NAME
+      - POSTGRES_USER
+      - DATABASE_HOST
+      - DATABASE_PORT
+      - POSTGRES_PASSWORD
+      - REDIS_HOST
+    command: bundle exec rails server -b 0.0.0.0
+  sidekiq:
+    build: .
+    volumes:
+      - .:/myapp
+    command: bundle exec sidekiq
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - DATABASE_NAME
+      - POSTGRES_USER
+      - DATABASE_HOST
+      - DATABASE_PORT
+      - POSTGRES_PASSWORD
+      - REDIS_HOST
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  redis:
+    image: redis
