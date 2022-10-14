@@ -133,8 +133,6 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jsbundling-rails (1.0.3)
-      railties (>= 6.0.0)
     lib (2.0.2)
     loofah (2.19.0)
       crass (~> 1.0.2)
@@ -345,7 +343,6 @@ DEPENDENCIES
   httparty
   image_processing (>= 1.2)
   jbuilder
-  jsbundling-rails
   lib
   mail (~> 2.7)
   pg
