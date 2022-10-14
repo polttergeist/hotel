@@ -1,4 +1,5 @@
 {
+  "name": "hotel",
   "dependencies": {
     "@rails/activestorage": "7.0.4",
     "@rails/webpacker": "5.4.3",
@@ -11,6 +12,6 @@
     "webpack-dev-server": "3"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "rails webpacker:compile"
   }
 }
