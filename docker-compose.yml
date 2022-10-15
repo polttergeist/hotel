@@ -15,6 +15,8 @@ services:
       - DATABASE_PORT
       - POSTGRES_PASSWORD
       - REDIS_HOST
+      - REDIS_PASSWORD
+      - PGPASSWORD
     command: bundle exec rails server -b 0.0.0.0
   sidekiq:
     build: .
@@ -32,7 +34,13 @@ services:
       - DATABASE_PORT
       - POSTGRES_PASSWORD
       - REDIS_HOST
+      - REDIS_PASSWORD
+      - PGPASSWORD
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
   redis:
     image: redis
+    ports:
+      - "6379:6379"
+    command: >
+          --requirepass ${REDIS_PASSWORD}
