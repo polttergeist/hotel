@@ -1,8 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
 <div class="row text-center wrap col-xs-4 col-xs-offset-4"  style="padding: 2rem;">
   <h1>Admin's rooms page</h1>
 </div>
+
+<%= render 'shared/errors', obj: @room if defined? @room %>
 
 <div class="wrap col-xs-8 col-xs-offset-2 admin-rooms-wrapper">
 <table id="rooms-table">
@@ -30,7 +30,7 @@
 </table>
 </div>
 
-<div class="d-flex justify-content-center col-xs-2 col-xs-offset-5" style="margin-top: 2rem;">
+<div class="d-flex justify-content-center col-xs-2 col-xs-offset-5" style="margin-top: 2rem; margin-bottom: 2rem;">
       <%= button_to "Create room", new_admin_room_path, method: :get %>
       <%# button_to "Log out", destroy_administrator_session_path, method: :delete %>
 </div>

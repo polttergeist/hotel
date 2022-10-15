@@ -1,6 +1,6 @@
 const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
-const input = document.querySelector('#email');
+const input = document.querySelector('#review_email');
 
 function onInput() {
     if (!isEmailValid(input.value)) {
@@ -9,7 +9,7 @@ function onInput() {
             document.querySelector('#invalid').remove()
         }
         if (!document.querySelector('#invalid')) {
-            input.insertAdjacentHTML("afterend", "<p id='invalid'>Your email is invalid.</p>")
+            input.insertAdjacentHTML("afterend", "<p id='invalid'>Your email is invalid.<p/>")
         }
     } else {
         input.style.borderColor = 'green';

@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <div class="row text-center wrap col-xs-4 col-xs-offset-4"  style="padding: 2rem;">
   <h1>Admin's bookings page</h1>
 </div>
@@ -9,8 +7,8 @@
     <%= render booking %>
     <hr style="margin: 0"/>
   <% end %>
-  <%= link_to 'Download CSV', "bookings_controller.csv" %>
-  <%= link_to 'Download XLSX', "bookings_controller.xlsx" %>
+  <%= button_to 'Download CSV report', "bookings_controller.csv", method: :get %>
+  <%= button_to 'Download XLSX report', "bookings_controller.xlsx", method: :get %>
 </div>
 
 <div class="col-xs-8 col-xs-offset-2 digg_pagination">

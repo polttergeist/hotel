@@ -1,4 +1,6 @@
 class Review < ApplicationRecord
+  after_update :enqueue
+
   validates :name, presence: true, length: { maximum: 70 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 100 }, format: { with: VALID_EMAIL_REGEX }
@@ -7,4 +9,8 @@ class Review < ApplicationRecord
 
   scope :approved_reviews, -> { Review.where(approved: true) }
   scope :all_ordered_by_date, -> { Review.all.order(created_at: :desc) }
+
+  def enqueue
+    ApproveMailer.with(email: self.email, type: "review").approve_mail.deliver_later if self.approved == 1
+  end
 end

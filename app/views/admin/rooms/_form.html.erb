@@ -1,6 +1,8 @@
 <div class="row">
   <div>
-    <%= form_with(url: admin_rooms_path, model: @room, :html => {class: "form-horizontal", role: "form"}) do |form| %>
+    <%= form_with(model: @room,
+                  url: @room.valid? ? admin_room_path(@room) : admin_rooms_path,
+                  :html => {class: "form-horizontal", role: "form"}) do |form| %>
       <%# render errors %>
 
       <div class="form-group">
@@ -34,8 +36,21 @@
         <div class="control-label col-sm-2">
           <%= form.label :images %>
         </div>
-        <div class="col-sm-6">
-          <%= form.file_field :images, multiple: true, direct_upload: true %>
+        <div class="col-sm-4">
+          <% if @room.images %>
+          <ul>
+            <% @room.images.each do |file| %>
+              <li>
+                <% if file.representable? %>
+                  <%= image_tag file.representation(resize_to_limit: [200, 200]) %>
+                  <%= link_to("Delete image", "/admin/rooms/#{file.id}/delete_image_attachment?room_id=#{@room.id}",
+                      class: "img-link") %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+          <% end %>
+          <%= form.file_field :images, multiple: true %>
         </div>
       </div>
 

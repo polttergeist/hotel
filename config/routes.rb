@@ -15,10 +15,15 @@ Rails.application.routes.draw do
   root "pages#index"
   resources :reviews
   resources :rooms
-  post "booking", to: "bookings#create"
+  get "booking/new/:room_id", to: "bookings#new"
+  post "booking/new/:room_id", to: "bookings#create"
 
   namespace :admin do
-    resources :rooms
+    resources :rooms do
+      member do
+        get :delete_image_attachment
+      end
+    end
     resources :reviews
     resources :bookings
     get 'bookings_controller(.:format)', to: 'files#download'

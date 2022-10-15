@@ -1,0 +1,11 @@
+<div id="carousel" class="carousel wrap col-xs-8 col-xs-offset-2" style="margin-bottom: 2rem;">
+  <div class="gallery">
+    <ul>
+      <% obj.each do |img| %>
+        <% if img.representable? %>
+          <li><%= image_tag img.representation(resize_to_limit: [300, 300]) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

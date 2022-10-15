@@ -10,13 +10,13 @@ class Admin::BookingsController < ApplicationController
   def update
     @booking.update(approved: true)
     redirect_to admin_bookings_path
-    flash[:notice] = "Booking was approved"
+    flash[:success] = "Booking was approved"
   end
 
   def destroy
     @booking.destroy
     redirect_to admin_bookings_path
-    flash[:notice] = "Booking was deleted"
+    flash[:success] = "Booking was deleted"
   end
 
   private

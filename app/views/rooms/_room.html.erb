@@ -1,4 +1,6 @@
 <div class="row rooms-wrap">
+  <div>
+
 <div id="<%= dom_id obj %>">
   <p>
     <%= "Name : #{obj.name}" %>
@@ -13,6 +15,7 @@
       <%= obj.description %>
     <% end %>
   </p>
-  <%= link_to "Book the room", room if defined? room %>
+  <%= link_to "Book the room", controller: "bookings", action: "new", room_id: room if defined? room %>
 </div>
+  </div>
 </div>

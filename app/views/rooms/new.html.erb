@@ -1,6 +1,8 @@
 <h1>New room</h1>
 
-<%= render "form", room: @room %>
+<%= render 'shared/errors', obj: @booking %>
+
+<%= render "rooms/form", room: @room %>
 
 <br>
 

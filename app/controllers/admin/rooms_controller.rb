@@ -11,10 +11,12 @@ class Admin::RoomsController < ApplicationController
   # GET /admin/rooms/new
   def new
     @room = Room.new
+    #add img
   end
 
   # GET /admin/rooms/1/edit
   def edit
+    #add img
   end
 
   # POST /admin/rooms or /admin/rooms.json
@@ -22,40 +24,40 @@ class Admin::RoomsController < ApplicationController
     @room = Room.new(room_params)
     authorize @room
 
-    respond_to do |format|
       if @room.save
-        format.html { redirect_to admin_rooms_path, notice: "Room was successfully created." }
-        format.json { render :index, status: :created }
+        binding.irb
+        @room.images.attach(params[:room][:images])
+        flash[:success] = "Room was successfully created."
+        redirect_to admin_rooms_path
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+        render "admin/rooms/new"
       end
-    end
   end
 
   # PATCH/PUT /admin/rooms/1 or /admin/rooms/1.json
   def update
     authorize @room
-    respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to admin_room_url(@room), notice: "Room was successfully updated." }
-        format.json { render :show, status: :ok, location: @room }
+        @room.images.attach(params[:room][:images])
+        flash[:success] = "Room was successfully updated."
+        redirect_to admin_rooms_path
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+        render "admin/rooms/edit"
       end
-    end
   end
 
   # DELETE /admin/rooms/1 or /admin/rooms/1.json
   def destroy
     authorize @room
     @room.destroy
+    flash[:success] = "Room was successfully destroyed."
+    redirect_to admin_rooms_path
+  end
 
-    respond_to do |format|
-      format.html { redirect_to admin_rooms_url, notice: "Room was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge_later
+    redirect_to edit_admin_room_path(params[:room_id])
   end
 
   private
@@ -66,7 +68,7 @@ class Admin::RoomsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def room_params
-    params.require(:room).permit(:name, :cost, :description, images: [])
+    params.require(:room).permit(:name, :cost, :description)
   end
 
   def set_admin

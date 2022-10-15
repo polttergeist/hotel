@@ -1,0 +1,18 @@
+<%= javascript_pack_tag "compute_price", "data-turbo-track": "reload", defer: true %>
+<%= javascript_pack_tag "email_validator", "data-turbo-track": "reload", defer: true %>
+
+<div class="row text-center wrap col-xs-4 col-xs-offset-4" style="padding: 1rem; margin-bottom: 2rem;">
+  <h1>Book the room</h1>
+</div>
+
+<%= render 'shared/errors', obj: @booking if defined? @booking %>
+
+<div class="wrap col-xs-8 col-xs-offset-2" style="margin-bottom: 2rem;">
+  <%= render "rooms/room", obj: @room %>
+</div>
+
+<% unless @room.images.empty? %>
+  <%= render "shared/carousel", obj: @room.images %>
+<% end %>
+
+<%= render "rooms/form" %>
