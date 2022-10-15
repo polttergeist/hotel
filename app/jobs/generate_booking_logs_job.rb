@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class GenerateBookingLogsJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     csv_string = CSV.generate do |csv|
-      csv << ["Name", "Email", "Start date", "End date"]
+      csv << ['Name', 'Email', 'Start date', 'End date']
       Booking.approved_bookings.each do |booking|
         csv << [booking.name, booking.email, booking.start_date, booking.end_date]
       end
     end
-    File.open("bookings_report.csv", "w") { |file| file.write(csv_string) }
+    File.open('bookings_report.csv', 'w') { |file| file.write(csv_string) }
 
     workbook = RubyXL::Workbook.new
     worksheet = workbook.add_worksheet('Approved bookings')

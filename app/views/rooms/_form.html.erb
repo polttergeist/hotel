@@ -1,8 +1,6 @@
 <div class="row" id="form">
   <div class="col-xs-12">
     <%= form_with(url: "/booking/new/#{@room.id}", :html => {class: "form-horizontal", role: "form"}) do |form| %>
-      <%# render errors %>
-
       <div class="form-group">
         <div class="control-label col-sm-2">
           <%= form.label :name %>

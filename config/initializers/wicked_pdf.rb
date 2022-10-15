@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WickedPDF Global Configuration
 #
 # Use this to set up shared configuration options for your entire application.
@@ -11,5 +13,5 @@
 WickedPdf.config = {
   # exe_path: '/usr/local/bin/wkhtmltopdf',
   # enable_local_file_access: true
-  exe_path: "C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"
+  exe_path: 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
 }

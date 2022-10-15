@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 class DateTimeValidator < ActiveModel::Validator
   def validate(booking)
-    if check_date(booking)
-      booking.errors.add :date_range, "overlaps with another booking"
-    end
+    booking.errors.add :date_range, 'overlaps with another booking' if check_date(booking)
   end
 
   private
@@ -22,6 +22,7 @@ class Booking < ApplicationRecord
   after_update :enqueue
   after_initialize do
     @date_range = (start_date..end_date)
+    self.approved = false
   end
 
   validates :name, :email, :start_date, :end_date, :approved, presence: true
@@ -33,9 +34,9 @@ class Booking < ApplicationRecord
   scope :approved_bookings, -> { Booking.where(approved: true) }
 
   def enqueue
-    if self.approved == 1
+    if approved == 1
       GenerateBookingLogsJob.perform_later
-      ApproveMailer.with(email: self.email, type: "booking").approve_mail.deliver_later
+      ApproveMailer.with(email:, type: 'booking').approve_mail.deliver_later
     end
   end
 end
