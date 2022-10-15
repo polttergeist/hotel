@@ -9,8 +9,6 @@ class DateTimeValidator < ActiveModel::Validator
 
   def check_date(booking)
     booking_date_range = (booking.start_date..booking.end_date)
-    n = booking.name
-    i = booking.room_id
     room_bookings = Room.find(booking.room_id).bookings.where.not(id: booking.id)
     room_bookings.any? { |b| booking_date_range.overlaps?(b.start_date..b.end_date) }
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'date'
 
@@ -16,59 +18,59 @@ require 'date'
 start_date = DateTime.new(2022, 12, 20)
 end_date = DateTime.new(2022, 12, 23)
 
-RSpec.describe "/bookings", type: :request do
+RSpec.describe '/bookings', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Booking. As you add validations to Booking, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
       name: Faker::Name.name,
       email: Faker::Internet.email,
-      start_date: start_date,
-      end_date: end_date,
+      start_date:,
+      end_date:,
       room_id: 1
     }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
-      name: "",
-      email: "",
-      start_date: start_date,
-      end_date: end_date,
+      name: '',
+      email: '',
+      start_date:,
+      end_date:,
       room_id: 1
     }
-  }
+  end
 
-  before { Room.create!(id: 1, name: "test_room", description: "test_description", cost: 228) }
+  before { Room.create!(id: 1, name: 'test_room', description: 'test_description', cost: 228) }
 
-  describe "GET /new" do
-    it "renders a successful response" do
+  describe 'GET /new' do
+    it 'renders a successful response' do
       Booking.create! valid_attributes
-      get "/booking/new", params: { room_id: '1' }
+      get '/booking/new', params: { room_id: '1' }
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Booking" do
-        expect {
-          post "/booking/new", params: valid_attributes
-        }.to change(Booking, :count).by(1)
+  describe 'POST /create' do
+    context 'with valid parameters' do
+      it 'creates a new Booking' do
+        expect do
+          post '/booking/new', params: valid_attributes
+        end.to change(Booking, :count).by(1)
       end
 
-      it "redirects to the rooms page" do
-        post "/booking/new", params: valid_attributes
-        expect(response).to redirect_to("/rooms")
+      it 'redirects to the rooms page' do
+        post '/booking/new', params: valid_attributes
+        expect(response).to redirect_to('/rooms')
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Booking" do
-        expect {
-          post "/booking/new", params: invalid_attributes
-        }.to change(Booking, :count).by(0)
+    context 'with invalid parameters' do
+      it 'does not create a new Booking' do
+        expect do
+          post '/booking/new', params: invalid_attributes
+        end.to change(Booking, :count).by(0)
       end
     end
   end
