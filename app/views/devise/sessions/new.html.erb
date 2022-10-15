@@ -1,0 +1,44 @@
+<%= javascript_pack_tag "email_validator", "data-turbo-track": "reload", defer: true %>
+
+<div class="row text-center wrap header col-xs-4 col-xs-offset-4" style="margin-bottom: 2rem;">
+  <h2>Log in</h2>
+</div>
+
+<div class="row" id="form">
+  <div class="col-xs-2 col-xs-offset-5">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group field">
+        <div class="control-label col-xs-1">
+          <%= f.label :email %><br />
+        </div>
+        <div class="col-xs-11">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
+
+      <div class="form-group field">
+        <div class="control-label col-xs-1">
+          <%= f.label :password %><br />
+        </div>
+        <div class="col-xs-11">
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-group field col-xs-12">
+          <div class="control-label">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group actions">
+        <div class="col-xs-2">
+          <%= f.submit %>
+        </div>
+      </div>
+<% end %>
+  </div>
+</div>
